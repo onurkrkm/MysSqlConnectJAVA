@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                 tv1.setText("");
 
-                String showUrl = "http://192.168.0.12/showUsers.php";
+                String showUrl = "http://192.168.0.12/showUsers.php"; //your hosting adress or xampp localadres
                 requestQueue = Volley.newRequestQueue(getApplicationContext());
 
 
@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
                             URL url = new URL(showUrl);
                             HttpURLConnection http = (HttpURLConnection) url.openConnection();
                             http.setRequestMethod("POST");
-                            JSONArray jsonArray = response.getJSONArray("showUser");
+                            JSONArray jsonArray = response.getJSONArray("showUser"); //showUser is return by php codes. The parameter(sql) is defined in the php code.
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                                String id= jsonObject.getString("id");
+                                String id= jsonObject.getString("id");      // MySql datebase kolums names
                                 String name= jsonObject.getString("name");
                                 String lastname= jsonObject.getString("lastname");
                                 tv1.append(id+"."+"Name :"+name+"Lastname :"+lastname+"\n");
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 requestQueue = Volley.newRequestQueue(getApplicationContext());
-                String insertUrl = "http://192.168.0.12/insertDb.php";
+                String insertUrl = "http://192.168.0.12/insertDb.php"; //your hosting adress or xampp localadres
 
                 StringRequest update = new StringRequest(Request.Method.POST,insertUrl, new Response.Listener<String>() {
                     @Override
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         Map<String,String> parameters  = new HashMap<String, String>();
                         String sql="INSERT INTO `users` (`id`, `name`, `lastname`) VALUES (NULL, '"+edt1.getText().toString()+"', '"+edt2.getText().toString()+"');";
 
-                        parameters.put("sql", sql);
+                        parameters.put("sql", sql); // Php codes waiting sql parameters, The parameter(sql) is defined in the php code.  
 
 
                         return parameters;
