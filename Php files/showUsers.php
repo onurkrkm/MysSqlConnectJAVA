@@ -11,7 +11,7 @@ function show()
  
 
  
- $query = "Select * FROM users; ";
+ $query = "Select * FROM users; "; //database table names
  
  
  $result = mysqli_query($connect, $query);
@@ -27,7 +27,7 @@ function show()
  }
   
  header('Content-Type: application/json');
- echo json_encode(array("showUser"=>$temp_array));
+ echo json_encode(array("showUser"=>$temp_array)); //'showUser' This parameter send by android. if the parameter is to be changed, it should be changed in the java codes as well.
  mysqli_close($connect);
 }
 
